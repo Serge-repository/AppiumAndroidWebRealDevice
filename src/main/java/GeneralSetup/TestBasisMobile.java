@@ -60,7 +60,7 @@ public class TestBasisMobile {
         } else if (deviceEnvironment == DeviceEnvironment.REAL_DEVICE) {
             capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Xiaomi 11T");
             capabilities.setCapability(MobileCapabilityType.UDID, propertiesLoader.getRealDeviceUdidProperty("xiaomi_11_T"));
-            // настройка которая позволяет запускать необходимую версию драйвера вручную (временное решение)
+// настройка которая позволяет АВТОМАТИЧЕСКИ СКАЧИВАТЬ и запускать версию драйвера совместимую с текущим Appium
             String driverPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main"
                     + File.separator + "java" + File.separator + "chromedriver";
             capabilities.setCapability("chromedriverExecutableDir", driverPath);
