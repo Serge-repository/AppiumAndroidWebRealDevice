@@ -33,30 +33,29 @@ public class TestBasisMobile {
 
     @BeforeClass
     public void beforeClass() throws IOException {
+// выбираем с чем работаем - эмулятор или реальный девайс
         chooseEnvironmentCapabilities();
-
         capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 1000);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        // для того чтобы УСТАНОВИТЬ ПРИЛОЖЕНИЕ (каждый раз при запуске кода) как на андроид так и на айос
         appPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main"
                 + File.separator + "resources" + File.separator + "ApiDemos-debug.apk";
         capabilities.setCapability(MobileCapabilityType.APP, appPath);
-        // сколько сохранять активность сессии в дебаге
+// сколько сохранять активность сессии в дебаге
         capabilities.setCapability("newCommandTimeout", 300);  //5 minutes
         capabilities.setCapability("appPackage", appPackage);
 
         if (deviceEnvironment == DeviceEnvironment.EMULATOR) {
             capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 4 API 30");
             capabilities.setCapability(MobileCapabilityType.UDID, "emulator-5554");
-            // для автоматического запуска эмулятора
+// для автоматического запуска эмулятора
             capabilities.setCapability("avd", "Pixel_4_API_30");
             capabilities.setCapability("avdLaunchTimeout", 180000);  //3 minutes
-            // для разблокировки экрана
+// для разблокировки экрана
             capabilities.setCapability("unlockType", "pin");
             capabilities.setCapability("unlockKey", "0000");
-//        capabilities.setCapability("unlockType", "pattern");
-//        capabilities.setCapability("unlockKey", "125478963"); // каждая точка паттерна это определенная цифра
+//  capabilities.setCapability("unlockType", "pattern");
+//  capabilities.setCapability("unlockKey", "125478963"); // каждая точка паттерна это определенная цифра
         } else if (deviceEnvironment == DeviceEnvironment.REAL_DEVICE) {
             capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Xiaomi 11T");
             capabilities.setCapability(MobileCapabilityType.UDID, propertiesLoader.getRealDeviceUdidProperty("xiaomi_11_T"));
@@ -89,14 +88,6 @@ public class TestBasisMobile {
         homeView = new HomeView(appiumDriver, wait);
         viewsView = new ViewsView(appiumDriver, wait);
     }
-
-    /////// Только для Android - вместо/дополнительно к MobileCapabilityType.APP ////////
-    // для того чтобы запускать уже установленное приложение на нужном скрине (appActivity)
-    // при условии что не нужно проходить логин и страницы статичны - можно использовать этот способ
-    // appActivity можно смотреть с помощью командной строки предварительно запустив нужную страницу на симуляторе
-
-//        capabilities.setCapability("appPackage", "io.appium.android.apis");
-//        capabilities.setCapability("appActivity", "io.appium.android.apis.app.Intents");
 
     protected void setAppActivity(AppActivities appActivity) {
         capabilities.setCapability("appActivity", appActivity.getActivityPath());

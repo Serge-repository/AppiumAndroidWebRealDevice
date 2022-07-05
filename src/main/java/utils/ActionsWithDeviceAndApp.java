@@ -39,7 +39,7 @@ public class ActionsWithDeviceAndApp {
     }
 
     public void lockDeviceForever() {
-        // lock device forever
+        // lock device
         ((AndroidDriver) appiumDriver).lockDevice(); // only available in AndroidDriver class
         System.out.println(((AndroidDriver) appiumDriver).isDeviceLocked());
     }
